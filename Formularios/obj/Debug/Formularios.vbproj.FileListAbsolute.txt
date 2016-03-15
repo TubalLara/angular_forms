@@ -1,0 +1,9 @@
+c:\users\arranque2\documents\visual studio 2013\Projects\Formularios\Formularios\bin\Formularios.dll.config
+c:\users\arranque2\documents\visual studio 2013\Projects\Formularios\Formularios\bin\Formularios.dll
+c:\users\arranque2\documents\visual studio 2013\Projects\Formularios\Formularios\bin\Formularios.pdb
+c:\users\arranque2\documents\visual studio 2013\Projects\Formularios\Formularios\bin\Formularios.xml
+c:\users\arranque2\documents\visual studio 2013\Projects\Formularios\Formularios\obj\Debug\Formularios.Resources.resources
+c:\users\arranque2\documents\visual studio 2013\Projects\Formularios\Formularios\obj\Debug\Formularios.vbproj.GenerateResource.Cache
+c:\users\arranque2\documents\visual studio 2013\Projects\Formularios\Formularios\obj\Debug\Formularios.dll
+c:\users\arranque2\documents\visual studio 2013\Projects\Formularios\Formularios\obj\Debug\Formularios.xml
+c:\users\arranque2\documents\visual studio 2013\Projects\Formularios\Formularios\obj\Debug\Formularios.pdb
