@@ -1,0 +1,94 @@
+﻿<!DOCTYPE html>
+<html ng-app="sampleApp">
+<head>
+    <title>Lista de Eventos</title>
+    <link href="styles/bootstrap.css" rel="stylesheet" />
+    <link href="styles/bootstrap-theme.css" rel="stylesheet" />    
+</head>
+<body>
+    <div class="panel" ng-controller="sampleCtrl">
+        <div class="well">
+            <form name="formu" novalidate ng-submit="agregar(usuario)" ng-class="mostrarValidacion ? 'validar' : ''">
+                <div class="well">
+                    <div class="form-group">
+                        <label>Nombre:</label>
+                        <input type="text" name="nombre" ng-required="obligatorio" ng-maxlength="20" ng-minlength="3"
+                               ng-pattern="patron" class="form-control" ng-model="cadena" />
+                    </div>
+                </div>
+            </form>
+
+            <div class="checkbox">
+                <label>
+                    Autonomo
+                    <input type="checkbox" name="autonomo" class="form-control" ng-model="check" ng-true-value="'Si'" ng-false-value="'No'" />
+                </label>
+            </div>
+            <div class="form-group">
+                <textarea type="text" cols="50" rows="5" name="sugerencias" ng-required="obligatorio" ng-maxlength="20" ng-minlength="3"
+                          ng-pattern="patron" class="form-control" ng-model="sug"></textarea>
+
+            </div>
+            
+            <div class="form-group">
+                <label>Seleccionar Elemento</label>
+                <select ng-model="evento" ng-options="item.evento for item in datos">
+                    <option value="">Selecciona uno</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Seleccionar Elemento</label>
+                <select ng-model="evento2" ng-options="item.codigo as item.evento for item in datos">
+                    <option value="">Selecciona uno</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Seleccionar Elemento</label>
+                <select ng-model="evento3" ng-options="item.codigo as item.evento group by item.categoria for item in datos">
+                    <option value="">Selecciona uno</option>
+                </select>
+            </div>
+        </div> 
+        <div class="well">
+            <p>Error obligatorio: {{formu.nombre.$error.required}}</p>
+            <p>Error longitud mínima: {{formu.nombre.$error.minlenght}}</p>
+            <p>Error longitud máxima: {{formu.nombre.$error.maxlenght}}</p>
+            <p>Error patrón: {{formu.nombre.$error.pattern}}</p>
+            <p>Nombre válido: {{formu.nombre.$valid}}</p>
+            <p>Autónomo: {{check}}</p>
+
+            <p>Error obligatorio textarea: {{formu.sugerencias.$error.required}}</p>
+            <p>Error longitud mínima textarea: {{formu.sugerencias.$error.minlenght}}</p>
+            <p>Error longitud máxima textarea: {{formu.sugerencias.$error.maxlenght}}</p>
+            <p>Error patrón textarea: {{formu.sugerencias.$error.pattern}}</p>
+            <p>textarea válido: {{formu.sugerencias.$valid}}</p>
+
+            <p>Evento seleccionado: {{evento || 'Ninguno'}}</p>
+            <p>Código seleccionado: {{evento2 || 'Ninguno'}}</p>
+            <p>Evento seleccionado: {{evento3 || 'Ninguno'}}</p>
+        </div>
+
+            
+    </div>
+
+
+    <script src="scripts/angular.js"></script>
+    <script>
+        angular.module("sampleApp", [])
+             .controller("sampleCtrl", function ($scope) {
+                 $scope.obligatorio = true;
+
+                 $scope.patron = new RegExp("^[a-z]");
+
+                 $scope.datos = [
+                     { codigo: 100, evento: "Final Fútbol", comprado: true, categoria: "musica" },
+                     { codigo: 200, evento: "Pasarela Cibeles", comprado: false, categoria: "deporte" },
+                     { codigo: 300, evento: "Estreno Star Wars", comprado: false, categoria: "cultura" },
+                     { codigo: 400, evento: "Final Futbol", comprado: false, categoria: "cultura" }
+                 ];
+        });
+    </script>
+</body>
+</html>
