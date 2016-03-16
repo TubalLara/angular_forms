@@ -5,8 +5,8 @@
     <link href="styles/bootstrap.css" rel="stylesheet" />
     <link href="styles/bootstrap-theme.css" rel="stylesheet" />
     <style>
-        form .ng-invalid.ng-dirty { background-color: lightpink;}
-        form .ng-valid.ng-dirty { background-color: lightgreen;}
+        form.validar .ng-invalid.ng-dirty { background-color: lightpink;}
+        form.validar .ng-valid.ng-dirty { background-color: lightgreen;}
         span.resume.ng-invalid, div.error {
             color: red;
             font-weight: bold;
@@ -18,7 +18,7 @@
 <body>
     <div class="panel" ng-controller="sampleCtrl">
         <div class="well">
-            <form name="formu" novalidate ng-submit="agregar(usuario)">
+            <form name="formu" novalidate ng-submit="agregar(usuario)" ng-class="mostrarValidacion ? 'validar' : ''">
                 <div class="well">
                     <div class="form-group">
                         <label>Nombre:</label>
@@ -27,13 +27,8 @@
                     <div class="form-group">
                         <label>Email:</label>
                         <input type="email" name="email" required class="form-control" ng-model="usuario.email" />
-                        <div class="error" ng-show="formu.email.$invalid && formu.email.$dirty">
-                            <span ng-show="formu.email.$error.email">
-                                Introduce un email válido
-                            </span>
-                            <span ng-show="formu.email.$error.required">
-                                Email obligatorio
-                            </span>
+                        <div class="error" ng-show="mostrarValidacion" ng-cloak>
+                            {{mensajeError(formu.email.$error)}}
                         </div>
                     </div>
                     <div class="checkbox">
@@ -42,13 +37,13 @@
                             Acepto términos y condiciones
                         </label>
                     </div>
-                    <button type="submit" class="btn btn-primary btn-block" ng-disabled="formu.$invalid">Enviar</button>
+                    <button type="submit" class="btn btn-primary btn-block" <!--ng-disabled="formu.$invalid"-->>Enviar</button>
             </form>
         </div>
         <div class="well">
             Mensaje: {{mensaje}}
             <div>
-                <span>
+                <span ng-class="formu.$valid ? 'ng-valid' : 'ng-invalid'">
                     Válido: {{formu.$valid ? 'Sí' : 'No'}}
                 </span>
             </div>
@@ -61,11 +56,26 @@
         angular.module("sampleApp", [])
              .controller("sampleCtrl", function ($scope) {
 
-               $scope.agregar = function (nuevo) {
-                   $scope.mensaje = nuevo.nombre + "(" + nuevo.email + ")" + nuevo.politica;
+                 $scope.agregar = function (nuevo) {
+                     if (formu.$valid) {
+                         $scope.mensaje = nuevo.nombre + "(" + nuevo.email + ")" + nuevo.politica;
+                     } else {
+                         $scope.mostrarValidacion = true;
+                     }
+                   
                };
 
                $scope.mensaje = "Listo";
+
+               $scope.mensajeError = function (error) {
+                   if (angular.isDefined(error)) {
+                       if (error.email) {
+                           return "Introduce un email válido";
+                       } else if (error.required) {
+                           return "Campo obligatorio"
+                       }
+                   }
+               };
                 
         });
     </script>

@@ -81,6 +81,7 @@
     <Import Include="System.Web.UI.HtmlControls" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="index3.html" />
     <Content Include="index2.html" />
     <Content Include="styles\bootstrap-theme.css" />
     <Content Include="styles\bootstrap-theme.min.css" />
